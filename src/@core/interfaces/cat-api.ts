@@ -4,8 +4,11 @@ export interface Cat {
     id: string,
     tags: string[],
     created_at: string,
-    url: string,
     mimetype: string,
+}
+
+export interface CatImage extends Cat{
+    url: string
 }
 
 export interface CatListQuery {
@@ -37,4 +40,8 @@ export interface CatQueryText extends CatQuery {
     fontSize: number,
     fontColor: string,
     fontBackground: string,
+}
+
+export interface CountResponse {
+    count: number;
 }

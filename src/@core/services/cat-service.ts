@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cat, CatListQuery, CatQuery, CatQueryText } from '../interfaces/cat-api';
+import { Cat, CatImage, CatListQuery, CatQuery, CatQueryText, CountResponse } from '../interfaces/cat-api';
 
 const API_URL = 'https://cataas.com';
 
@@ -16,16 +16,16 @@ export class CatService {
     return this.http.get<Cat>(`${API_URL}/cat`, { params: query as any });
   }
 
-  getCatWithText(text: string, query: CatQueryText): Observable<Cat> {
-    return this.http.get<Cat>(`${API_URL}/cat/says/${text}`, { params: query as any });
+  getCatWithText(text: string, query: CatQueryText): Observable<CatImage> {
+    return this.http.get<CatImage>(`${API_URL}/cat/says/${text}`, { params: query as any });
   }
 
   getCatById(id: string, query: CatQuery): Observable<Cat> {
     return this.http.get<Cat>(`${API_URL}/cat/${id}`, { params: query as any });
   }
 
-  getCatByIdWithText(id: string, text: string, query: CatQueryText): Observable<Cat> {
-    return this.http.get<Cat>(`${API_URL}/cat/${id}/says/${text}`, { params: query as any });
+  getCatByIdWithText(id: string, text: string, query: CatQueryText): Observable<CatImage> {
+    return this.http.get<CatImage>(`${API_URL}/cat/${id}/says/${text}`, { params: query as any });
   }
 
   getCatByTag(tag: string, query: CatQuery): Observable<Cat> {
@@ -42,5 +42,9 @@ export class CatService {
 
   getTags(): Observable<string[]> {
     return this.http.get<string[]>(`${API_URL}/api/tags`);
+  }
+
+  getCount(): Observable<CountResponse> {
+    return this.http.get<CountResponse>(`${API_URL}/api/count`);
   }
 }
